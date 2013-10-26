@@ -3,7 +3,7 @@
 
 Tým
 ---
-<<<<<<< HEAD
+HEAD
 =======
 Jan Linka
 Pavel Štíbal
