@@ -6,6 +6,4 @@ Tým
 Jan Linka
 
 Pavel Štíbal
-
-Lenka Houdková
 >>>>>>>
