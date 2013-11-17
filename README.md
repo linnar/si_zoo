@@ -4,6 +4,6 @@
 Tým
 ---
 Jan Linka
-
+>>>>>>>
 Pavel Štíbal
 >>>>>>>
