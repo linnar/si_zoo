@@ -21,8 +21,8 @@ create table employee (
 
 create table feed (
   name                      varchar(255) not null,
-  amount                    integer,
-  minimum                   integer,
+  amount                    varchar(255),
+  minimum                   varchar(255),
   constraint pk_feed primary key (name))
 ;
 
