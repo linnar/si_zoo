@@ -64,14 +64,14 @@ public class Employee extends Model{
 	//Prida zamestnanci zvire, o ktere se bude starat
 	public void addAnimal(String chipNumber){
 		this.caresFor.add(Animal.find.ref(chipNumber));
-		this.save();
+		this.update();
 		this.saveManyToManyAssociations("caresFor");
 	}
 	
 	//Odstrani zamestnanci zvire, o ktere se stara
 	public void removeAnimal(String chipNumber){
 		this.caresFor.remove(Animal.find.ref(chipNumber));
-		this.save();
+		this.update();
 		this.saveManyToManyAssociations("caresFor");
 	}
 	
@@ -83,6 +83,12 @@ public class Employee extends Model{
 		}else{
 			return "Can't remove this employee. There are animals who are connected to this employee!";
 		}
+	}
+	
+	public void edit(String name, String lastName){
+		this.name=name;
+		this.lastName=lastName;
+		this.update();
 	}
 	
 	

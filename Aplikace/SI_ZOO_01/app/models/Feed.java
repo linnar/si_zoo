@@ -60,5 +60,15 @@ public class Feed extends Model{
 		}
 	}
 	
+	public void edit(int amount, int minimum){
+		this.amount = ""+amount;
+		this.minimum = ""+minimum;
+		this.update();
+	}
+	
+    public void decreaseAmount(int decrease){
+    	this.amount = ""+(Integer.parseInt(amount)-decrease);
+    	this.update();
+    }
 	
 }

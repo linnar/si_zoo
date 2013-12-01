@@ -74,28 +74,28 @@ public class Animal extends Model{
 	//Prida osobu ktera se stara o dane zvire
 	public void addTheOneWhoCares(String employeeEmail){
 		this.caresForMe.add(Employee.find.ref(employeeEmail));
-		this.save();
+		this.update();
 		this.saveManyToManyAssociations("caresForMe");
 	}
 	
 	//Odebere osobu ktera se stara o dane zvire
 	public void removeTheOneWhoCares(String employeeEmail){
 		this.caresForMe.remove(Employee.find.ref(employeeEmail));
-		this.save();
+		this.update();
 		this.saveManyToManyAssociations("caresForMe");
 	}
 	
 	//Prida krmivo ktere zvire ji
 	public void addWhatIEat(String feedName){
 		this.iEat.add(Feed.find.ref(feedName));
-		this.save();
+		this.update();
 		this.saveManyToManyAssociations("iEat");
 	}
 
 	//Odebere krmivo ktere zvire ji
 	public void removeWhatIEat(String feedName){
 		this.iEat.remove(Feed.find.ref(feedName));
-		this.save();
+		this.update();
 		this.saveManyToManyAssociations("iEat");
 	}
 	
@@ -108,6 +108,11 @@ public class Animal extends Model{
 		this.caresForMe = null;
 		this.iEat = null;
 		this.delete();
+	}
+	
+	public void edit(String name){
+		this.name=name;
+		this.update();
 	}
 	
 	/*public static List<Employee> findEmployeeByAnimal(Animal animal){
