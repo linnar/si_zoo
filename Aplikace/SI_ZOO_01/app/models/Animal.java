@@ -17,13 +17,13 @@ public class Animal extends Model{
 	public String specie;
 	public String name;
 	@ManyToMany
-	public List<Employee> caresForMe = new ArrayList<>();
+	public List<Staff> caresForMe = new ArrayList<>();
 	@ManyToMany
 	public List<Feed> iEat = new ArrayList<>();
 	
 	public static Model.Finder<String, Animal> find = new Model.Finder<>(String.class,Animal.class);
 	
-	private Animal(String chipNumber,String birthDate,String specie,String name,Employee employee,Feed feed){
+	private Animal(String chipNumber,String birthDate,String specie,String name,Staff employee,Feed feed){
 		this.chipNumber=chipNumber;
 		this.birthDate=birthDate;
 		this.specie=specie;
@@ -34,7 +34,7 @@ public class Animal extends Model{
 	
 	//vytvori zvire a ulozi ho do databaze
 	public static Animal create(String chipNumber,String birthDate,String specie,String name,String employeeEmail,String feedName){
-		Animal animal = new Animal(chipNumber,birthDate,specie,name,Employee.find.ref(employeeEmail),Feed.find.ref(feedName));
+		Animal animal = new Animal(chipNumber,birthDate,specie,name,Staff.find.ref(employeeEmail),Feed.find.ref(feedName));
 		animal.save();
 		animal.saveManyToManyAssociations("caresForMe");
 		animal.saveManyToManyAssociations("iEat");
@@ -73,14 +73,14 @@ public class Animal extends Model{
 	
 	//Prida osobu ktera se stara o dane zvire
 	public void addTheOneWhoCares(String employeeEmail){
-		this.caresForMe.add(Employee.find.ref(employeeEmail));
+		this.caresForMe.add(Staff.find.ref(employeeEmail));
 		this.update();
 		this.saveManyToManyAssociations("caresForMe");
 	}
 	
 	//Odebere osobu ktera se stara o dane zvire
 	public void removeTheOneWhoCares(String employeeEmail){
-		this.caresForMe.remove(Employee.find.ref(employeeEmail));
+		this.caresForMe.remove(Staff.find.ref(employeeEmail));
 		this.update();
 		this.saveManyToManyAssociations("caresForMe");
 	}
@@ -101,8 +101,8 @@ public class Animal extends Model{
 	
 	//Zrusi zvire a odebere ho vsem zamestnancum, kteri se o nej starali
 	public void remove(){
-		List<Employee> list = Employee.findEmployeeByAnimal(this.chipNumber);
-		for(Employee emp: list){
+		List<Staff> list = Staff.findEmployeeByAnimal(this.chipNumber);
+		for(Staff emp: list){
 			emp.removeAnimal(this.chipNumber);
 		}
 		this.caresForMe = null;

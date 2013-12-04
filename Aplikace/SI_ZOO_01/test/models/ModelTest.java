@@ -23,8 +23,8 @@ public class ModelTest extends WithApplication {
 
 	@Test
 	public void insertEmployee(){
-		Employee.create("bob@mail.com", "Bob", "Bobinski", "11.11.1111");
-		Employee bob = Employee.find.where().eq("contact", "bob@mail.com").findUnique();
+		Staff.create("bob@mail.com", "Bob", "Bobinski", "11.11.1111");
+		Staff bob = Staff.find.where().eq("contact", "bob@mail.com").findUnique();
 		assertNotNull(bob);
 		assertEquals("Bobinski",bob.lastName);
 	}
@@ -39,7 +39,7 @@ public class ModelTest extends WithApplication {
 	
 	@Test
 	public void insertAnimal(){
-		Employee bob = Employee.create("bob@mail.com", "Bob", "Bobinski", "11.11.1111");
+		Staff bob = Staff.create("bob@mail.com", "Bob", "Bobinski", "11.11.1111");
 		Feed wheat = Feed.create("wheat", 5000, 200);
 		Animal.create("7777777", "22.22.2222", "elephant", "Bobo", "bob@mail.com", "wheat");
 		Animal animal = Animal.find.where().eq("chipNumber", "7777777").findUnique();
@@ -49,21 +49,21 @@ public class ModelTest extends WithApplication {
 	
 	@Test
 	public void getWhoCaresForAnimal1(){
-		Employee bob = Employee.create("bob@mail.com", "Bob", "Bobinski", "11.11.1111");
+		Staff bob = Staff.create("bob@mail.com", "Bob", "Bobinski", "11.11.1111");
 		Feed wheat = Feed.create("wheat", 5000, 200);
 		Animal.create("7777777", "22.22.2222", "elephant", "Bobo", "bob@mail.com", "wheat");
 		Animal animal = Animal.find.where().eq("chipNumber", "7777777").findUnique();
 		bob.addAnimal("7777777");
-		List<Employee> whoCares = Employee.findEmployeeByAnimal(animal.chipNumber);
+		List<Staff> whoCares = Staff.findEmployeeByAnimal(animal.chipNumber);
 		assertEquals(1,whoCares.size());
 		assertEquals("Bobinski",whoCares.get(0).lastName);
 	}
 	
 	@Test
 	public void getWhoCaresForAnimal2(){
-		Employee bob = Employee.create("bob@mail.com", "Bob", "Bobinski", "11.11.1111");
-		Employee jane = Employee.create("jane@mail.com", "Jane", "NotBobinski", "33.33.3333");
-		Employee pablo = Employee.create("pablo@mail.com", "Pablo", "AlsoNotBobinski", "44.44.4444");
+		Staff bob = Staff.create("bob@mail.com", "Bob", "Bobinski", "11.11.1111");
+		Staff jane = Staff.create("jane@mail.com", "Jane", "NotBobinski", "33.33.3333");
+		Staff pablo = Staff.create("pablo@mail.com", "Pablo", "AlsoNotBobinski", "44.44.4444");
 		Feed wheat = Feed.create("wheat", 5000, 200);
 		Animal.create("7777777", "22.22.2222", "elephant", "Bobo", "bob@mail.com", "wheat");
 		Animal animal = Animal.find.where().eq("chipNumber", "7777777").findUnique();
@@ -72,7 +72,7 @@ public class ModelTest extends WithApplication {
 		bob.addAnimal("7777777");
 		jane.addAnimal("7777777");
 		pablo.addAnimal("7777777");
-		List<Employee> whoCaresForAnimal = Employee.findEmployeeByAnimal(animal.chipNumber);
+		List<Staff> whoCaresForAnimal = Staff.findEmployeeByAnimal(animal.chipNumber);
 		assertEquals(3,whoCaresForAnimal.size());
 		assertEquals("Bobinski",whoCaresForAnimal.get(0).lastName);
 		assertEquals("NotBobinski",whoCaresForAnimal.get(1).lastName);
@@ -81,8 +81,8 @@ public class ModelTest extends WithApplication {
 	
 	@Test
 	public void getWhatIEat(){
-		Employee bob = Employee.create("bob@mail.com", "Bob", "Bobinski", "11.11.1111");
-		Employee jane = Employee.create("jane@mail.com", "Jane", "NotBobinski", "33.33.3333");
+		Staff bob = Staff.create("bob@mail.com", "Bob", "Bobinski", "11.11.1111");
+		Staff jane = Staff.create("jane@mail.com", "Jane", "NotBobinski", "33.33.3333");
 		Feed wheat = Feed.create("wheat", 5000, 200);
 		Feed cheese = Feed.create("cheese", 2000, 100);
 		Animal animal1 = Animal.create("7777777", "22.22.2222", "elephant", "Bobo", "bob@mail.com", "wheat");
@@ -106,8 +106,8 @@ public class ModelTest extends WithApplication {
 	
 	@Test
 	public void getWhatIEat2(){
-		Employee bob = Employee.create("bob@mail.com", "Bob", "Bobinski", "11.11.1111");
-		Employee jane = Employee.create("jane@mail.com", "Jane", "NotBobinski", "33.33.3333");
+		Staff bob = Staff.create("bob@mail.com", "Bob", "Bobinski", "11.11.1111");
+		Staff jane = Staff.create("jane@mail.com", "Jane", "NotBobinski", "33.33.3333");
 		Feed wheat = Feed.create("wheat", 5000, 200);
 		Feed cheese = Feed.create("cheese", 2000, 100);
 		Animal animal1 = Animal.create("7777777", "22.22.2222", "elephant", "Bobo", "bob@mail.com", "wheat");
@@ -128,8 +128,8 @@ public class ModelTest extends WithApplication {
 	
 	@Test
 	public void animalSelect(){
-		Employee bob = Employee.create("bob@mail.com", "Bob", "Bobinski", "11.11.1111");
-		Employee jane = Employee.create("jane@mail.com", "Jane", "NotBobinski", "33.33.3333");
+		Staff bob = Staff.create("bob@mail.com", "Bob", "Bobinski", "11.11.1111");
+		Staff jane = Staff.create("jane@mail.com", "Jane", "NotBobinski", "33.33.3333");
 		Feed wheat = Feed.create("wheat", 5000, 200);
 		Feed bread = Feed.create("bread", 5000, 300);
 		Feed popcorn = Feed.create("popcorn", 5000, 10000);
@@ -165,8 +165,8 @@ public class ModelTest extends WithApplication {
 	
 	@Test
 	public void animalRename(){
-		Employee bob = Employee.create("bob@mail.com", "Bob", "Bobinski", "11.11.1111");
-		Employee jane = Employee.create("jane@mail.com", "Jane", "NotBobinski", "33.33.3333");
+		Staff bob = Staff.create("bob@mail.com", "Bob", "Bobinski", "11.11.1111");
+		Staff jane = Staff.create("jane@mail.com", "Jane", "NotBobinski", "33.33.3333");
 		Feed wheat = Feed.create("wheat", 5000, 200);
 		Feed bread = Feed.create("bread", 5000, 300);
 		Feed popcorn = Feed.create("popcorn", 5000, 10000);
@@ -191,8 +191,8 @@ public class ModelTest extends WithApplication {
 	
 	@Test
 	public void employeeSelect(){
-		Employee bob = Employee.create("bob@mail.com", "Bob", "Bobinski", "11.11.1111");
-		Employee jane = Employee.create("jane@mail.com", "Jane", "NotBobinski", "33.33.3333");
+		Staff bob = Staff.create("bob@mail.com", "Bob", "Bobinski", "11.11.1111");
+		Staff jane = Staff.create("jane@mail.com", "Jane", "NotBobinski", "33.33.3333");
 		Feed wheat = Feed.create("wheat", 5000, 200);
 		Feed bread = Feed.create("bread", 5000, 300);
 		Feed popcorn = Feed.create("popcorn", 5000, 10000);
@@ -203,9 +203,9 @@ public class ModelTest extends WithApplication {
 		Animal animal3 = Animal.create("5555555", "??.??.????", "unicorn", "Ponny", "jane@mail.com", "popcorn");
 		animal2.addWhatIEat("cheese");
 
-		List<Employee> list1 = Employee.findEmployeeByLastName("Bobinski");
-		List<Employee> list2 = Employee.findEmployeeByName("Jane");
-		List<Employee> list3 = Employee.findEmployeeByBirthDate("33.33.3333");
+		List<Staff> list1 = Staff.findEmployeeByLastName("Bobinski");
+		List<Staff> list2 = Staff.findEmployeeByName("Jane");
+		List<Staff> list3 = Staff.findEmployeeByBirthDate("33.33.3333");
 
 		assertEquals(1,list1.size());
 		assertEquals("bob@mail.com",list1.get(0).contact);
@@ -217,8 +217,8 @@ public class ModelTest extends WithApplication {
 	
 	@Test
 	public void employeeRename(){
-		Employee bob = Employee.create("bob@mail.com", "Bob", "Bobinski", "11.11.1111");
-		Employee jane = Employee.create("jane@mail.com", "Jane", "NotBobinski", "33.33.3333");
+		Staff bob = Staff.create("bob@mail.com", "Bob", "Bobinski", "11.11.1111");
+		Staff jane = Staff.create("jane@mail.com", "Jane", "NotBobinski", "33.33.3333");
 		Feed wheat = Feed.create("wheat", 5000, 200);
 		Feed bread = Feed.create("bread", 5000, 300);
 		Feed popcorn = Feed.create("popcorn", 5000, 10000);
@@ -229,9 +229,9 @@ public class ModelTest extends WithApplication {
 		Animal animal3 = Animal.create("5555555", "??.??.????", "unicorn", "Ponny", "jane@mail.com", "popcorn");
 		animal2.addWhatIEat("cheese");
 
-		List<Employee> list1 = Employee.findEmployeeByContact("bob@mail.com");
+		List<Staff> list1 = Staff.findEmployeeByContact("bob@mail.com");
 		bob.edit("Bobby", "StillBobinski");
-		List<Employee> list2 = Employee.findEmployeeByContact("bob@mail.com");
+		List<Staff> list2 = Staff.findEmployeeByContact("bob@mail.com");
 		
 		assertEquals(1,list1.size());
 		assertEquals(1,list2.size());
@@ -244,8 +244,8 @@ public class ModelTest extends WithApplication {
 	
 	@Test
 	public void feedSelect(){ 
-		Employee bob = Employee.create("bob@mail.com", "Bob", "Bobinski", "11.11.1111");
-		Employee jane = Employee.create("jane@mail.com", "Jane", "NotBobinski", "33.33.3333");
+		Staff bob = Staff.create("bob@mail.com", "Bob", "Bobinski", "11.11.1111");
+		Staff jane = Staff.create("jane@mail.com", "Jane", "NotBobinski", "33.33.3333");
 		Feed wheat = Feed.create("wheat", 5000, 200);
 		Feed bread = Feed.create("bread", 5000, 300);
 		Feed popcorn = Feed.create("popcorn", 5000, 10000);
@@ -284,8 +284,8 @@ public class ModelTest extends WithApplication {
 	
 	@Test
 	public void feedRename(){
-		Employee bob = Employee.create("bob@mail.com", "Bob", "Bobinski", "11.11.1111");
-		Employee jane = Employee.create("jane@mail.com", "Jane", "NotBobinski", "33.33.3333");
+		Staff bob = Staff.create("bob@mail.com", "Bob", "Bobinski", "11.11.1111");
+		Staff jane = Staff.create("jane@mail.com", "Jane", "NotBobinski", "33.33.3333");
 		Feed wheat = Feed.create("wheat", 5000, 200);
 		Feed bread = Feed.create("bread", 5000, 300);
 		Feed popcorn = Feed.create("popcorn", 5000, 10000);

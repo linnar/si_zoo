@@ -8,7 +8,7 @@ import javax.persistence.*;
 import play.db.ebean.Model;
 
 @Entity
-public class Employee extends Model{
+public class Staff extends Model{
 	
 	@Id
 	public String contact;
@@ -18,42 +18,42 @@ public class Employee extends Model{
 	@ManyToMany
 	public List<Animal> caresFor = new ArrayList<>();
 	
-	public static Model.Finder<String, Employee> find = new Model.Finder<>(String.class, Employee.class);
+	public static Model.Finder<String, Staff> find = new Model.Finder<>(String.class, Staff.class);
 	
 	//Vytvori zamestnance a ulozi ho do databaze
-	public static Employee create(String contact,String name,String lastname,String birthDate){
-		Employee employee = new Employee(contact,name,lastname,birthDate);
+	public static Staff create(String contact,String name,String lastname,String birthDate){
+		Staff employee = new Staff(contact,name,lastname,birthDate);
 		employee.save();
 		employee.saveManyToManyAssociations("caresFor");
 		return employee;
 	}
 	
 	//Vyhleda zamestnance podle zvirete, o ktere se stara
-	public static List<Employee> findEmployeeByAnimal(String chipNumber){
+	public static List<Staff> findEmployeeByAnimal(String chipNumber){
 		return find.fetch("caresFor").where().eq("caresFor.chipNumber", chipNumber).findList();
 	}
 	
 	//Vyhleda zamestnance podle kontaktu(email)
-	public static List<Employee> findEmployeeByContact(String contact){
+	public static List<Staff> findEmployeeByContact(String contact){
 		return find.where().eq("contact", contact).findList();
 	}
 	
 	//Vyhleda zamestnance podle jmena
-	public static List<Employee> findEmployeeByName(String name){
+	public static List<Staff> findEmployeeByName(String name){
 		return find.where().eq("name", name).findList();
 	}
 	
 	//Vyhleda zamestnance podle prijmeni
-	public static List<Employee> findEmployeeByLastName(String lastName){
+	public static List<Staff> findEmployeeByLastName(String lastName){
 		return find.where().eq("lastName", lastName).findList();
 	}
 	
 	//Vyhleda zamestnance podle data narozeni
-	public static List<Employee> findEmployeeByBirthDate(String birthDate){
+	public static List<Staff> findEmployeeByBirthDate(String birthDate){
 		return find.where().eq("birthDate", birthDate).findList();
 	}
 	
-	Employee(String contact,String name,String lastname,String birthDate){
+	Staff(String contact,String name,String lastname,String birthDate){
 		this.contact=contact;
 		this.name=name;
 		this.lastName=lastname;
